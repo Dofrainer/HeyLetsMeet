@@ -9,7 +9,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="328dp"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
         android:layout_weight="0.98">
 
         <TextView
@@ -22,39 +23,44 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/textView" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="textPostalAddress"
-            android:ems="10"
-            android:id="@+id/editText"
+        <LinearLayout
+            android:id="@+id/people"
             android:layout_below="@+id/textView"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="54dp"
-            android:layout_marginStart="54dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:text="주소를 입력하세요" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
 
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="textPostalAddress"
+                    android:ems="10"
+                    android:id="@+id/editText"
+                    android:text="주소를 입력하세요." />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:text="-"
+                    android:id="@+id/button"
+                    android:layout_below="@+id/editText"
+                    android:layout_toLeftOf="@+id/button2"
+                    android:layout_toStartOf="@+id/button2" />
+            </LinearLayout>
+
+        </LinearLayout>
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="+"
-            android:id="@+id/button"
-            android:layout_below="@+id/editText"
-            android:layout_toLeftOf="@+id/button2"
-            android:layout_toStartOf="@+id/button2" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
             android:id="@+id/button2"
-            android:layout_alignBottom="@+id/button"
-            android:layout_alignRight="@+id/editText"
-            android:layout_alignEnd="@+id/editText" />
+           android:layout_alignLeft="@+id/people"
+            android:layout_below="@+id/people"/>
     </RelativeLayout>
 
     <FrameLayout
@@ -64,10 +70,10 @@
 
         <Button
             android:id="@+id/broad"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="다음"
-            android:layout_gravity="right|bottom">
+            android:layout_gravity="right|bottom"
+            android:layout_width="wrap_content">
         </Button>
     </FrameLayout>
 
