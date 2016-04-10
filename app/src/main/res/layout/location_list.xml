@@ -33,24 +33,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <EditText
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:inputType="textPostalAddress"
                     android:ems="10"
-                    android:id="@+id/editText"
-                    android:text="주소를 입력하세요." />
+                    android:id="@+id/TextLocation"
+                    android:text="주소를 입력하세요."
+                    android:textAlignment="center"
+                    android:textSize="20dp" />
 
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="5"
                     android:text="-"
-                    android:id="@+id/button"
-                    android:layout_below="@+id/editText"
-                    android:layout_toLeftOf="@+id/button2"
-                    android:layout_toStartOf="@+id/button2" />
+                    android:id="@+id/btndelpeople"
+                    android:layout_below="@+id/TextLocation"
+                    android:layout_toLeftOf="@+id/btnaddpeople"
+                    android:layout_toStartOf="@+id/btnaddpeople" />
             </LinearLayout>
 
         </LinearLayout>
@@ -58,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="+"
-            android:id="@+id/button2"
+            android:id="@+id/btnaddpeople"
            android:layout_alignLeft="@+id/people"
             android:layout_below="@+id/people"/>
     </RelativeLayout>
