@@ -15,12 +15,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Location_List" android:label="인원 추가">
-        </activity>
         <activity android:name=".Location_Select" android:label="위치 선택">
         </activity>
         <activity android:name=".Select_Middle_Position" android:label="중간 위치 선택">
         </activity>
+        <activity android:name=".Select_Data" android:label="asdf">
+        </activity>
+
     </application>
 
 </manifest>

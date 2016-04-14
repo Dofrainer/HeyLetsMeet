@@ -29,7 +29,7 @@ public class Select_Middle_Position extends AppCompatActivity {
         drawer_Layout = (DrawerLayout) findViewById(R.id.Drawer_Layout);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        toggle = new ActionBarDrawerToggle(this, drawer_Layout, R.string.open_bar, R.string.close_Bar) {
+        toggle = new ActionBarDrawerToggle(this, drawer_Layout, R.string.open_bar, R.string.close_bar) {
         };
         drawer_Layout.addDrawerListener(toggle);
         toggle.syncState();
@@ -39,7 +39,7 @@ public class Select_Middle_Position extends AppCompatActivity {
 
         Select_Position_Menu.setAdapter(
                 new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, navItems));
-        Select_Position_Menu.setOnItemClickListener(new DrawerItemClickListener());
+        Select_Position_Menu.setOnItemClickListener(new MenuItemClickListener());
 
 
     }
@@ -53,7 +53,7 @@ public class Select_Middle_Position extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+    private class MenuItemClickListener implements ListView.OnItemClickListener {
 
         @Override
         public void onItemClick(AdapterView<?> adapter, View view, int position,
@@ -74,8 +74,10 @@ public class Select_Middle_Position extends AppCompatActivity {
                 case 4:
                     Select_Position.setBackgroundColor(Color.parseColor("#DAA520"));
                     break;
-
             }
+
+            drawer_Layout.closeDrawer(Select_Position_Menu);
+
 
         }
 

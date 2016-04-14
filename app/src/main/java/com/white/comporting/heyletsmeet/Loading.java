@@ -15,7 +15,7 @@ public class Loading extends AppCompatActivity {
         Handler handler = new Handler(){
             public void handleMessage(Message msg){
                 super.handleMessage(msg);
-                startActivity(new Intent(Loading.this, Location_List.class));
+                startActivity(new Intent(Loading.this, Select_Data.class));
                 //overridePendingTransition(R.anim.abc_fade_in, 0);
                 finish();
             }
