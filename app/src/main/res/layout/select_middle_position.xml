@@ -8,12 +8,24 @@
     <FrameLayout
         android:id="@+id/SelectPosition"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-        <ImageView
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/temp_location_select"/>
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:src="@drawable/temp_location_select"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="완료ㅂ"
+                android:layout_weight="6"/>
+
+        </LinearLayout>
     </FrameLayout>
 
     <ListView

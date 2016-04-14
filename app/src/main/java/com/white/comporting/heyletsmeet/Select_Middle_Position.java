@@ -39,7 +39,7 @@ public class Select_Middle_Position extends AppCompatActivity {
 
         Select_Position_Menu.setAdapter(
                 new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, navItems));
-        Select_Position_Menu.setOnItemClickListener(new DrawerItemClickListener());
+        Select_Position_Menu.setOnItemClickListener(new MenuItemClickListener());
 
 
     }
@@ -53,7 +53,7 @@ public class Select_Middle_Position extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+    private class MenuItemClickListener implements ListView.OnItemClickListener {
 
         @Override
         public void onItemClick(AdapterView<?> adapter, View view, int position,
@@ -74,8 +74,10 @@ public class Select_Middle_Position extends AppCompatActivity {
                 case 4:
                     Select_Position.setBackgroundColor(Color.parseColor("#DAA520"));
                     break;
-
             }
+
+            drawer_Layout.closeDrawer(Select_Position_Menu);
+
 
         }
 
