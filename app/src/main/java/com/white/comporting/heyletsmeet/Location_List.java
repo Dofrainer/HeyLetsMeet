@@ -38,7 +38,7 @@ public class Location_List  extends AppCompatActivity {
     Button.OnClickListener mClickListener2 = new View.OnClickListener() {
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.TextLocation:
+                case R.id.broad:
                     Log.d("OnClickListener", "click session button");
                     // 액티비티 실행
                     Intent intentSubActivity =
