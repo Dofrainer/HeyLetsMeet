@@ -29,7 +29,7 @@ public class Select_Middle_Position extends AppCompatActivity {
         drawer_Layout = (DrawerLayout) findViewById(R.id.Drawer_Layout);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        toggle = new ActionBarDrawerToggle(this, drawer_Layout, R.string.open_bar, R.string.close_Bar) {
+        toggle = new ActionBarDrawerToggle(this, drawer_Layout, R.string.open_bar, R.string.close_bar) {
         };
         drawer_Layout.addDrawerListener(toggle);
         toggle.syncState();
