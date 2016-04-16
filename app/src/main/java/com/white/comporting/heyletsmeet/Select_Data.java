@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
@@ -34,7 +35,7 @@ public class Select_Data extends Activity {
         // 처음 등록된 Tab을 보여줌.
         tabHost.setCurrentTab(0);
 
-        findViewById(R.id.TextLocation).setOnClickListener(mClickListener1);
+//        findViewById(R.id.TextLocation).setOnClickListener(mClickListener1);
         findViewById(R.id.broad).setOnClickListener(mClickListener2);
 
         Spinner spnKind = (Spinner)findViewById(R.id.spinSelectKind);
@@ -43,7 +44,19 @@ public class Select_Data extends Activity {
         spnKind.setAdapter(adspin);
 
 
+        ListView listview ;
+        ListView_Peaple_Adapter adapter;
+
+        // Adapter 생성
+        adapter = new ListView_Peaple_Adapter() ;
+
+        // 리스트뷰 참조 및 Adapter달기
+        listview = (ListView) findViewById(R.id.ListView_Peaple);
+        listview.setAdapter(adapter);
+
+
     }
+    /*
     TextView.OnClickListener mClickListener1 = new View.OnClickListener() {
         public void onClick(View v) {
             switch (v.getId()) {
@@ -57,6 +70,7 @@ public class Select_Data extends Activity {
             }
         }
     };
+    */
     Button.OnClickListener mClickListener2 = new View.OnClickListener() {
         public void onClick(View v) {
             switch (v.getId()) {

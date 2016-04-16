@@ -43,45 +43,11 @@
                     android:layout_alignParentStart="true"
                     android:id="@+id/txtPeaple" />
                 <!--밑의 내용은 리스트뷰로 바꿔서 만들어야할 것-->
-                <LinearLayout
-                    android:id="@+id/people"
-                    android:layout_below="@+id/txtPeaple"
+                <ListView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:ems="10"
-                            android:id="@+id/TextLocation"
-                            android:text="주소를 입력하세요."
-                            android:textAlignment="center"
-                            android:textSize="20dp" />
-
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="5"
-                            android:text="-"
-                            android:id="@+id/btndelpeople"
-                            android:layout_below="@+id/TextLocation"
-                            android:layout_toLeftOf="@+id/btnaddpeople"
-                            android:layout_toStartOf="@+id/btnaddpeople" />
-                        </LinearLayout>
-                     </LinearLayout>
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="+"
-                        android:id="@+id/btnaddpeople"
-                        android:layout_alignLeft="@+id/people"
-                        android:layout_below="@+id/people"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ListView_Peaple"
+                    android:layout_below="@+id/txtPeaple"></ListView>
             </RelativeLayout>
             <!--탭1 끝-->
 
