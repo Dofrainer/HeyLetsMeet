@@ -46,8 +46,14 @@
                 <ListView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/ListView_Peaple"
+                    android:id="@+id/listviewPeaple"
                     android:layout_below="@+id/txtPeaple"></ListView>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:layout_below="@+id/listviewPeaple"
+                    android:id="@+id/btnAddPeaple"/>
             </RelativeLayout>
             <!--탭1 끝-->
 
@@ -71,42 +77,17 @@
                     android:layout_alignParentStart="true"
                     android:id="@+id/txtKind" />
                 <!--밑의 내용은 리스트뷰로 바꿔서 만들어야할 것-->
-                <LinearLayout
-                    android:id="@+id/kind"
-                    android:layout_below="@+id/txtKind"
+                <ListView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <LinearLayout
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <Spinner
-                            android:id="@+id/spinSelectKind"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            />
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="5"
-                            android:text="-"
-                            android:id="@+id/btnDelKind"
-                            android:layout_below="@+id/TextLocation"
-                            android:layout_toLeftOf="@+id/btnaddpeople"
-                            android:layout_toStartOf="@+id/btnaddpeople" />
-                    </LinearLayout>
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/listviewKind"
+                    android:layout_below="@+id/txtKind"></ListView>
                 <Button
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="+"
                     android:id="@+id/btnAddKind"
-                    android:layout_alignLeft="@+id/kind"
-                    android:layout_below="@+id/kind"/>
+                    android:layout_below="@+id/listviewKind"/>
             </RelativeLayout>
             <!--탭2 끝-->
         </FrameLayout>
