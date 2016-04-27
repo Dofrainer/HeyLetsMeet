@@ -1,6 +1,7 @@
 package com.white.comporting.heyletsmeet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,16 @@ public class ListView_Peaple_Adapter extends ArrayAdapter<ListView_Peaple_Data> 
 
         if (p != null) {
             TextView Adress = (TextView) v.findViewById(R.id.TextLocation);
+            Adress.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    select_data.startActivity(new Intent(select_data.getApplicationContext(),Location_Select.class));
+
+                }
+            });
+
+
             Button BtnRemove = (Button) v.findViewById(R.id.BtnDelPeople);
             BtnRemove.setTag(position);
             BtnRemove.setOnClickListener(new View.OnClickListener() {
