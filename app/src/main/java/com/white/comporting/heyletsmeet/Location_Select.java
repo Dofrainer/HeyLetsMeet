@@ -17,6 +17,9 @@ import com.nhn.android.maps.NMapView;
 import com.nhn.android.maps.maplib.NGeoPoint;
 import com.nhn.android.maps.nmapmodel.NMapError;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Created by Baek on 2016-04-11.
  */
@@ -45,9 +48,22 @@ public class Location_Select  extends NMapActivity
         NMapView.LayoutParams lp = new NMapView.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT, NMapView.LayoutParams.BOTTOM_RIGHT);
         mMapView.setBuiltInZoomControls(true, lp);
-        NMapLocationManager localManager = new NMapLocationManager(this);
+
+        final NMapLocationManager localManager = new NMapLocationManager(this);
+
         localManager.enableMyLocation(false);
-        mMapController.animateTo(localManager.getMyLocation());
+        Timer mTimer = new Timer();
+
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (localManager.isMyLocationFixed()) {
+                    mMapController.animateTo(localManager.getMyLocation());
+                }
+            }
+        }, 3000, 3000);
+
+
         findViewById(R.id.btnEndSelect).setOnClickListener(mClickListener);
 
     }
