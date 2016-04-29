@@ -7,12 +7,21 @@
         android:layout_height="match_parent"
         android:layout_weight="7"
         android:id="@+id/EditSearch"/>
-
-    <com.nhn.android.maps.NMapView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:id="@+id/mapView"/>
+        android:layout_weight="1">
+        <com.nhn.android.maps.NMapView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/mapView"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnFindNowLoc"
+            android:text="현재위치"/>
+    </FrameLayout>
 
     <Button
         android:layout_width="match_parent"

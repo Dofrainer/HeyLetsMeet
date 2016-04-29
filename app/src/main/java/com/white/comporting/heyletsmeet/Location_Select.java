@@ -1,9 +1,11 @@
 package com.white.comporting.heyletsmeet;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +14,14 @@ import android.widget.Toast;
 
 import com.nhn.android.maps.NMapActivity;
 import com.nhn.android.maps.NMapController;
+import com.nhn.android.maps.NMapItemizedOverlay;
 import com.nhn.android.maps.NMapLocationManager;
+import com.nhn.android.maps.NMapOverlay;
+import com.nhn.android.maps.NMapOverlayItem;
 import com.nhn.android.maps.NMapView;
 import com.nhn.android.maps.maplib.NGeoPoint;
 import com.nhn.android.maps.nmapmodel.NMapError;
 
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by Baek on 2016-04-11.
@@ -28,7 +31,8 @@ public class Location_Select  extends NMapActivity
 {
     private NMapView mMapView;
     private NMapController mMapController;
-    private NMapLocationManager mMapLocationManager;
+    private NMapLocationManager localManager;
+    private NMapOverlayItem Overlay;
     String ApiId = "Rl8S6gGJny8y5aRlpCbd";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,6 @@ public class Location_Select  extends NMapActivity
 
         mMapView = (NMapView)findViewById(R.id.mapView);
         mMapView.setClientId(ApiId);
-
         mMapView.setEnabled(true);
         mMapView.setFocusable(true);
         mMapView.setFocusableInTouchMode(true);
@@ -49,36 +52,40 @@ public class Location_Select  extends NMapActivity
                 ViewGroup.LayoutParams.WRAP_CONTENT, NMapView.LayoutParams.BOTTOM_RIGHT);
         mMapView.setBuiltInZoomControls(true, lp);
 
-        final NMapLocationManager localManager = new NMapLocationManager(this);
-
+        localManager = new NMapLocationManager(this);
         localManager.enableMyLocation(false);
-        Timer mTimer = new Timer();
 
-        mTimer.schedule(new TimerTask() {
+
+        Button btnFind = (Button)findViewById(R.id.btnFindNowLoc);
+        btnFind.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
+            public void onClick(View v) {
                 if (localManager.isMyLocationFixed()) {
-                    mMapController.animateTo(localManager.getMyLocation());
+                    NGeoPoint Now = new NGeoPoint();
+                    Now.set(localManager.getMyLocation());
+                    mMapController.animateTo(Now);
+
+                }else
+                {
+                }
+
+            }
+        });
+
+        btnFind.performClick();
+
+
+        findViewById(R.id.btnEndSelect).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.btnEndSelect:
+                        // 액티비티 실행
+                        finish();
+                        break;
                 }
             }
-        }, 3000, 3000);
-
-
-        findViewById(R.id.btnEndSelect).setOnClickListener(mClickListener);
+        });
 
     }
-
-    Button.OnClickListener mClickListener = new View.OnClickListener() {
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnEndSelect:
-                // 액티비티 실행
-                finish();
-                break;
-        }
-        }
-    };
-
-
 
 }
