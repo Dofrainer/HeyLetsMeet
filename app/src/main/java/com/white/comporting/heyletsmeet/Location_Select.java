@@ -94,8 +94,8 @@ public class Location_Select  extends AppCompatActivity implements OnMapReadyCal
                     case R.id.btnlocalend:
                         SharedPreferences preferences = getSharedPreferences("Location", MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
-                        Location_Data.PrePutDouble(editor,"Long",listAddress.get(0).getLongitude());
                         Location_Data.PrePutDouble(editor,"Lat",listAddress.get(0).getLatitude());
+                        Location_Data.PrePutDouble(editor,"Long",listAddress.get(0).getLongitude());
                         editor.putString("strAdd", String.valueOf(listAddress.get(0).getFeatureName()));
 
 
