@@ -6,22 +6,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:layout_weight="1">
-    <TabHost
-        android:id="@+id/tabHost"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_weight="1">
-        <TabWidget
-            android:id="@android:id/tabs"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            />
-        <FrameLayout
-            android:id="@android:id/tabcontent"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:paddingTop="69px" >
+
 
             <!--탭1-->
             <RelativeLayout
@@ -32,16 +19,6 @@
                 android:id="@+id/Tab1"
                 >
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="20dp"
-                    android:text="만나는 인원"
-                    android:textSize="20sp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:id="@+id/txtPeaple" />
                 <!--밑의 내용은 리스트뷰로 바꿔서 만들어야할 것-->
                 <ListView
                     android:layout_width="match_parent"
@@ -56,41 +33,6 @@
                     android:id="@+id/btnAddPeaple"/>
             </RelativeLayout>
             <!--탭1 끝-->
-
-            <!--탭2-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="10dp"
-                android:layout_weight="0.98"
-                android:id="@+id/Tab2"
-                >
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="20dp"
-                    android:text="종류 선택"
-                    android:textSize="20sp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:id="@+id/txtKind" />
-                <!--밑의 내용은 리스트뷰로 바꿔서 만들어야할 것-->
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/listviewKind"
-                    android:layout_below="@+id/txtKind"></ListView>
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="+"
-                    android:id="@+id/btnAddKind"
-                    android:layout_below="@+id/listviewKind"/>
-            </RelativeLayout>
-            <!--탭2 끝-->
-        </FrameLayout>
         <Button
             android:id="@+id/broad"
             android:layout_height="wrap_content"
@@ -100,7 +42,7 @@
             android:text="완료">
         </Button>
 
-    </TabHost>
+
     </LinearLayout>
 
 

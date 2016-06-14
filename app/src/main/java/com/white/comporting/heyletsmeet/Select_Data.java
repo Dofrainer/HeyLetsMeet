@@ -1,35 +1,34 @@
 package com.white.comporting.heyletsmeet;
-import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TabHost;
 
 import java.util.ArrayList;
 
-public class Select_Data extends Activity {
+public class Select_Data extends AppCompatActivity {
 
     ListView_Peaple_Adapter peapleAdapter;
     ListView_Kind_Adapter kindAdapter;
+    ArrayList<Location_Data> Data= new ArrayList<Location_Data>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_data);
-        TabHost tabHost = (TabHost)findViewById(R.id.tabHost);
-        // findViewById를 이용해 TabHost인스턴스를 얻은경우 꼭 호출 필요
-        tabHost.setup();
-        // Tab builder 객체
-        TabHost.TabSpec spec;
+        Data.add(new Location_Data());
+        Data.add(new Location_Data());
+        Data.add(new Location_Data());
+        Data.add(new Location_Data());
+        Data.add(new Location_Data());
 
 
         // Tab 01 세팅 & 등록
-        spec = tabHost.newTabSpec("Tab 00"); // Tab Builder 객체 생성
-        spec.setIndicator("인원 선택");         // Tab 제목
-        spec.setContent(R.id.Tab1);       // Tab 내용
-        tabHost.addTab(spec);               // Tab 등록
+
 
         ListView listViewPeaple = (ListView)findViewById(R.id.listviewPeaple); // 탭1 리스트뷰 추가
 
@@ -41,28 +40,6 @@ public class Select_Data extends Activity {
         findViewById(R.id.btnAddPeaple).setOnClickListener (mClickListener);
 
 
-
-
-        // Tab 02 세팅 & 등록
-        spec = tabHost.newTabSpec("Tab 01"); // Tab Builder 객체 생성
-        spec.setIndicator("업종 선택");        // Tab 제목
-        spec.setContent(R.id.Tab2);    // Tab 내용
-
-        ListView listViewKind = (ListView)findViewById(R.id.listviewKind); // 탭1 리스트뷰 추가
-
-        ArrayList<ListView_Kind_Data> ArrayListKind = new ArrayList<ListView_Kind_Data>();
-        ListView_Kind_Data k1 = new ListView_Kind_Data();// 리스트에 추가할 객체입니다.
-        ArrayListKind.add(k1);// 리스트에 객체를 추가합니다.
-        kindAdapter = new  ListView_Kind_Adapter(this, this, R.layout.listview_kind, ArrayListKind);// 어댑터를 생성합니다.
-        listViewKind.setAdapter(kindAdapter);
-        findViewById(R.id.btnAddKind).setOnClickListener (mClickListener);
-
-
-
-
-        tabHost.addTab(spec);  // Tab 등록
-
-        tabHost.setCurrentTab(0);  // 처음 등록된 Tab을 보여줌.
 
 
     }
@@ -81,11 +58,60 @@ public class Select_Data extends Activity {
                 case R.id.btnAddPeaple:
                     peapleAdapter.addItem();
                     break;
-                case R.id.btnAddKind:
-                    kindAdapter.addItem();
-                    break;
 
             }
+
+
         }
     };
+    @Override
+    public void onResume() {
+        super.onResume();
+        SharedPreferences edit = getSharedPreferences("Location", MODE_PRIVATE);
+        double Long = edit.getFloat("Long",0);
+        double Lat = edit.getFloat("Lat",0);
+        String strAdd = edit.getString("strAdd","");
+        int pos = edit.getInt("pos",-1);
+        SharedPreferences.Editor editor = edit.edit();
+        editor.clear();
+        editor.commit();
+
+        if(pos != -1)
+        {
+            Data.get(pos).Long = Long;
+            Data.get(pos).Lat = Lat;
+            Data.get(pos).strAdd = strAdd;
+            Data.get(pos).position = pos;
+            peapleAdapter.SetItem(pos,strAdd);
+        }
+
+
+
+
+    }
+
+
+
+}
+
+class Location_Data
+{
+    public double Long;
+    public double Lat;
+    public String strAdd;
+    public int position;
+    Location_Data( )
+    {
+        this.Long = 0;
+        this.Lat = 0;
+        this.strAdd = "";
+        position = -1;
+    }
+    void RemoveData()
+    {
+        this.Long = 0;
+        this.Lat = 0;
+        this.strAdd = "";
+        position = -1;
+    }
 }

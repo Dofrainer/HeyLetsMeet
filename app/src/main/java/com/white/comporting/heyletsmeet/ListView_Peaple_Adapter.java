@@ -2,6 +2,7 @@ package com.white.comporting.heyletsmeet;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,8 +39,13 @@ public class ListView_Peaple_Adapter extends ArrayAdapter<ListView_Peaple_Data> 
         this.notifyDataSetChanged();
     }
 
+    //아이템 문자값 추가
+    public void SetItem(int position,String strAdd) {
+        items.get(position).setAddress(strAdd);
+        this.notifyDataSetChanged();
+    }
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if (v == null) {
             LayoutInflater vi = (LayoutInflater) select_data.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -53,10 +59,16 @@ public class ListView_Peaple_Adapter extends ArrayAdapter<ListView_Peaple_Data> 
 
                 @Override
                 public void onClick(View v) {
+                    SharedPreferences preferences = select_data.getSharedPreferences("Location",select_data.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putInt("pos", position);
+                    editor.commit();
                     select_data.startActivity(new Intent(select_data.getApplicationContext(),Location_Select.class));
 
                 }
             });
+
+
 
 
             Button BtnRemove = (Button) v.findViewById(R.id.BtnDelPeople);
@@ -66,6 +78,7 @@ public class ListView_Peaple_Adapter extends ArrayAdapter<ListView_Peaple_Data> 
                 public void onClick(View view) {
                     int position = (int) view.getTag();
                     select_data.peapleAdapter.removeItem(position);
+                    select_data.Data.get(position).RemoveData();
                 }
             });
 
@@ -75,5 +88,7 @@ public class ListView_Peaple_Adapter extends ArrayAdapter<ListView_Peaple_Data> 
         }
         return v;
     }
+
+
 
 }
