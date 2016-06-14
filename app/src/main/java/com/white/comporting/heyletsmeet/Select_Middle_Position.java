@@ -1,5 +1,7 @@
 package com.white.comporting.heyletsmeet;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -13,7 +15,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
@@ -24,9 +25,11 @@ import java.util.ArrayList;
 public class Select_Middle_Position extends AppCompatActivity implements OnMapReadyCallback {
     SupportMapFragment mapFragment;
     GoogleMap mGoogleMap;
-    ArrayList<Location_Data> LocSubwayArray = new ArrayList<Location_Data>();
-    ArrayList<Location_Data> LocDataArray = new ArrayList<Location_Data>();
-    Location_Data MiddlePos = new Location_Data();
+    ArrayList<Location_Data> LocSubwayArray = new ArrayList<Location_Data>(); //position은 사용안함.
+    ArrayList<Location_Data> LocDataArray = new ArrayList<Location_Data>(); //position은 데이터의 유무 판단
+    ArrayList<Location_Data> NearSubwayArray = new ArrayList<Location_Data>();  //position은 사용안함
+    Location_Data MiddlePos = new Location_Data(); //position은 실존하는 위치데이터의 갯수
+
 
 
 
@@ -53,6 +56,7 @@ public class Select_Middle_Position extends AppCompatActivity implements OnMapRe
             String strAdd = edit.getString("strAdd"+i,"");
             int pos = edit.getInt("pos"+i,-1);
             LocDataArray.add(new Location_Data(Lat,Long,strAdd,pos));
+            NearSubwayArray.add(new Location_Data()); //가까운 지하철역 선택 5군데
 
 
         }
@@ -108,7 +112,7 @@ public class Select_Middle_Position extends AppCompatActivity implements OnMapRe
 
         MiddlePos.position = 0;
         MiddlePos.strAdd = "중간위치";
-        //선택 마커 표시하기
+        //사용자 위치 마커 표시하기
         for(int i = 0; i < LocDataArray.size() ; i ++)
         {
             if(LocDataArray.get(i).position != -1) {
@@ -146,6 +150,33 @@ public class Select_Middle_Position extends AppCompatActivity implements OnMapRe
             }
         }
 
+        //중간위치와 지하철의 거리 계산
+        for(int i = 0; i < LocSubwayArray.size() ; i++)
+        {
+            Location SubLoc = new Location(LocSubwayArray.get(i).strAdd);
+            SubLoc.setLatitude(LocSubwayArray.get(i).Lat);
+            SubLoc.setLongitude(LocSubwayArray.get(i).Long);
+
+            Location MidLoc = new Location(MiddlePos.strAdd);
+            MidLoc.setLatitude(MiddlePos.Lat);
+            MidLoc.setLongitude(MiddlePos.Long);
+            double distance = MidLoc.distanceTo(SubLoc);
+            for(int j=0;j<5; j++)
+            {
+                if(NearSubwayArray.get(j).distance > distance || NearSubwayArray.get(j).position == -1)
+                {
+                    NearSubwayArray.get(j).Lat = LocSubwayArray.get(i).Lat;
+                    NearSubwayArray.get(j).Long = LocSubwayArray.get(i).Long;
+                    NearSubwayArray.get(j).strAdd = LocSubwayArray.get(i).strAdd;
+                    NearSubwayArray.get(j).distance = distance;
+                    NearSubwayArray.get(j).position = 1;
+
+                    break;
+                }
+
+            }
+        }
+
 
 
 
@@ -160,5 +191,25 @@ public class Select_Middle_Position extends AppCompatActivity implements OnMapRe
                 return false;
             }
         });
+
+        mGoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                for(int i =0 ; i < LocSubwayArray.size() ; i ++)
+                {
+                    if(marker.getTitle().equals(LocSubwayArray.get(i).strAdd))
+                    {
+                        SharedPreferences preferences = getSharedPreferences("FinalData", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("strAdd", marker.getTitle());
+                        editor.commit();
+                        Intent intentSubActivity = new Intent(Select_Middle_Position.this, Type_List.class);
+                        startActivity(intentSubActivity);
+                    }
+                }
+
+            }
+        });
+
     }
 }

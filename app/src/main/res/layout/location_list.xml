@@ -34,7 +34,7 @@
             </RelativeLayout>
             <!--탭1 끝-->
         <Button
-            android:id="@+id/broad"
+            android:id="@+id/broadPeaple"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:layout_gravity="bottom"

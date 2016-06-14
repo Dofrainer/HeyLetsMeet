@@ -13,13 +13,13 @@ import java.util.ArrayList;
 public class Location_List extends AppCompatActivity {
 
     ListView_Peaple_Adapter peapleAdapter;
-    ListView_Kind_Adapter kindAdapter;
+    ListView_Type_Adapter kindAdapter;
     ArrayList<Location_Data> LocDataArray = new ArrayList<Location_Data>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.select_data);
+        setContentView(R.layout.location_list);
         LocDataArray.add(new Location_Data());
         LocDataArray.add(new Location_Data());
         LocDataArray.add(new Location_Data());
@@ -38,7 +38,7 @@ public class Location_List extends AppCompatActivity {
         peapleAdapter = new  ListView_Peaple_Adapter(this, this, R.layout.listview_peaple, ArrayListPeaple);// 어댑터를 생성합니다.
         listViewPeaple.setAdapter(peapleAdapter);
         findViewById(R.id.btnAddPeaple).setOnClickListener (mClickListener);
-        findViewById(R.id.broad).setOnClickListener (mClickListener);
+        findViewById(R.id.broadPeaple).setOnClickListener (mClickListener);
 
 
 
@@ -48,7 +48,7 @@ public class Location_List extends AppCompatActivity {
     Button.OnClickListener mClickListener = new View.OnClickListener() {
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.broad: // 완료 버튼 클릭시
+                case R.id.broadPeaple: // 완료 버튼 클릭시
                     SharedPreferences edit = getSharedPreferences("LocationArray", MODE_PRIVATE);
                     SharedPreferences.Editor editor = edit.edit();
                     for(int i = 0 ; i < 5 ; i ++)

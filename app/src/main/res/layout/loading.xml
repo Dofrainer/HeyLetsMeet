@@ -4,13 +4,10 @@
     android:gravity="top|center"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="#fff200">
-    <TextView
+    android:background="#95CAFF">
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:padding="20dp"
-        android:text="야! 만나자!"
-        android:textSize="70sp" />
+        android:src="@drawable/loading"/>
 
 </LinearLayout>

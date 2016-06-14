@@ -7,6 +7,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -62,10 +63,17 @@ public class Location_Select  extends AppCompatActivity implements OnMapReadyCal
             public void onClick(View view) {
                 switch(view.getId()){
                     case R.id.bGetLocation:
+
                         Geocoder geocoder;
                         InputMethodManager inputManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
                         inputManager.hideSoftInputFromWindow(getLocation .getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
                         strAddress = getAdd.getText().toString();
+                        if(strAddress.equals("") == true)
+                        {
+                            Toast.makeText(getApplicationContext(), "동을 입력해주세요.", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
+
                         geocoder = new Geocoder(Location_Select.this);
                         try {
                             listAddress = geocoder.getFromLocationName(strAddress,1);
@@ -105,6 +113,18 @@ public class Location_Select  extends AppCompatActivity implements OnMapReadyCal
 
 
                 }
+            }
+        });
+
+        getAdd.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if (i ==  KeyEvent.KEYCODE_ENTER)
+                {
+                    getLocation.performClick();
+                    return true;
+                }
+                return false;
             }
         });
 

@@ -25,6 +25,10 @@
         </activity>
         <activity android:name=".Location_List" android:label="만나는 인원">
         </activity>
+        <activity android:name=".Type_List" android:label="업종 선택">
+        </activity>
+        <activity android:name=".Client" android:label="전송중...">
+        </activity>
 
     </application>
 

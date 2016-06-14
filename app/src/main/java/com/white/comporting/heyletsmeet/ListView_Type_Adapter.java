@@ -14,22 +14,26 @@ import java.util.ArrayList;
 /**
  * Created by Baek on 2016-04-17.
  */
-public class ListView_Kind_Adapter extends ArrayAdapter<ListView_Kind_Data> {
-    private Location_List locationList;
+public class ListView_Type_Adapter extends ArrayAdapter<ListView_Type_Data> {
+    private Type_List type_list;
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
-    private ArrayList<ListView_Kind_Data> items;
+    private ArrayList<ListView_Type_Data> items;
 
-    public ListView_Kind_Adapter(Location_List locationList, Context context, int textViewResourceId, ArrayList<ListView_Kind_Data> items) {
+    public ListView_Type_Adapter(Type_List type_list, Context context, int textViewResourceId, ArrayList<ListView_Type_Data> items) {
         super(context, textViewResourceId, items);
-        this.locationList = locationList;
+        this.type_list = type_list;
         this.items = items;
     }
 
     // 아이템 추가
     public void addItem() {
-        ListView_Kind_Data Data = new ListView_Kind_Data();
+        ListView_Type_Data Data = new ListView_Type_Data();
         items.add(Data);
         this.notifyDataSetChanged();
+    }
+    // 아이템 추가
+    public ListView_Type_Data getItem(int intItem) {
+        return  items.get(intItem);
     }
 
     //아이템 삭제
@@ -37,16 +41,20 @@ public class ListView_Kind_Adapter extends ArrayAdapter<ListView_Kind_Data> {
         items.remove(position);
         this.notifyDataSetChanged();
     }
-
+    //아이템 수 반환
+    public  int CountItem()
+    {
+        return items.size();
+    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if (v == null) {
-            LayoutInflater vi = (LayoutInflater) locationList.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = vi.inflate(R.layout.listview_kind, null);
+            LayoutInflater vi = (LayoutInflater) type_list.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            v = vi.inflate(R.layout.listview_type, null);
         }
-        ListView_Kind_Data p = items.get(position);
+        ListView_Type_Data p = items.get(position);
 
         if (p != null) {
 
@@ -70,8 +78,8 @@ public class ListView_Kind_Adapter extends ArrayAdapter<ListView_Kind_Data> {
                 public void onClick(View view) {
 
                     int position = (int) view.getTag();
-                    locationList.kindAdapter.removeItem(position);
-                    locationList.kindAdapter.notifyDataSetChanged();
+                    type_list.TypeAdapter.removeItem(position);
+                    type_list.TypeAdapter.notifyDataSetChanged();
                 }
             });
 
