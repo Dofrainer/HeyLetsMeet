@@ -1,5 +1,7 @@
 package com.white.comporting.heyletsmeet;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
@@ -43,7 +45,9 @@ public class Client extends AppCompatActivity {
         editor.clear();
         editor.commit();
         String URL = Client_SendData.SendToServer(Select_Subway,arrType,Client.this);
-        Toast.makeText(getApplicationContext(),URL,Toast.LENGTH_SHORT);
+        Intent myIntent;
+        myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.nvaer.com"));
+        startActivity(myIntent);
     }
 }
 /**
