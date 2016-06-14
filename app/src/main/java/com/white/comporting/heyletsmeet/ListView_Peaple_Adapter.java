@@ -16,13 +16,13 @@ import java.util.ArrayList;
  * Created by Baek on 2016-04-17.
  */
 public class ListView_Peaple_Adapter extends ArrayAdapter<ListView_Peaple_Data> {
-    private Select_Data select_data;
+    private Location_List locationList;
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
     private ArrayList<ListView_Peaple_Data> items;
 
-    public ListView_Peaple_Adapter(Select_Data select_data, Context context, int textViewResourceId, ArrayList<ListView_Peaple_Data> items) {
+    public ListView_Peaple_Adapter(Location_List locationList, Context context, int textViewResourceId, ArrayList<ListView_Peaple_Data> items) {
         super(context, textViewResourceId, items);
-        this.select_data = select_data;
+        this.locationList = locationList;
         this.items = items;
     }
 
@@ -39,16 +39,23 @@ public class ListView_Peaple_Adapter extends ArrayAdapter<ListView_Peaple_Data> 
         this.notifyDataSetChanged();
     }
 
-    //아이템 문자값 추가
+    //아이템 주소값 바꾸기
     public void SetItem(int position,String strAdd) {
         items.get(position).setAddress(strAdd);
         this.notifyDataSetChanged();
     }
+
+    //아이템 수 반환
+    public  int CountItem()
+    {
+        return items.size();
+    }
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if (v == null) {
-            LayoutInflater vi = (LayoutInflater) select_data.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater vi = (LayoutInflater) locationList.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = vi.inflate(R.layout.listview_peaple, null);
         }
         ListView_Peaple_Data p = items.get(position);
@@ -59,11 +66,11 @@ public class ListView_Peaple_Adapter extends ArrayAdapter<ListView_Peaple_Data> 
 
                 @Override
                 public void onClick(View v) {
-                    SharedPreferences preferences = select_data.getSharedPreferences("Location",select_data.MODE_PRIVATE);
+                    SharedPreferences preferences = locationList.getSharedPreferences("Location", locationList.MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putInt("pos", position);
                     editor.commit();
-                    select_data.startActivity(new Intent(select_data.getApplicationContext(),Location_Select.class));
+                    locationList.startActivity(new Intent(locationList.getApplicationContext(),Location_Select.class));
 
                 }
             });
@@ -77,8 +84,8 @@ public class ListView_Peaple_Adapter extends ArrayAdapter<ListView_Peaple_Data> 
                 @Override
                 public void onClick(View view) {
                     int position = (int) view.getTag();
-                    select_data.peapleAdapter.removeItem(position);
-                    select_data.Data.get(position).RemoveData();
+                    locationList.peapleAdapter.removeItem(position);
+                    locationList.LocDataArray.get(position).RemoveData();
                 }
             });
 

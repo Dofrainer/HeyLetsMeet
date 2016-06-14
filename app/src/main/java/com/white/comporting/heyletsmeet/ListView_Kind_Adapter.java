@@ -8,7 +8,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -16,13 +15,13 @@ import java.util.ArrayList;
  * Created by Baek on 2016-04-17.
  */
 public class ListView_Kind_Adapter extends ArrayAdapter<ListView_Kind_Data> {
-    private Select_Data select_data;
+    private Location_List locationList;
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
     private ArrayList<ListView_Kind_Data> items;
 
-    public ListView_Kind_Adapter(Select_Data select_data, Context context, int textViewResourceId, ArrayList<ListView_Kind_Data> items) {
+    public ListView_Kind_Adapter(Location_List locationList, Context context, int textViewResourceId, ArrayList<ListView_Kind_Data> items) {
         super(context, textViewResourceId, items);
-        this.select_data = select_data;
+        this.locationList = locationList;
         this.items = items;
     }
 
@@ -39,11 +38,12 @@ public class ListView_Kind_Adapter extends ArrayAdapter<ListView_Kind_Data> {
         this.notifyDataSetChanged();
     }
 
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if (v == null) {
-            LayoutInflater vi = (LayoutInflater) select_data.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater vi = (LayoutInflater) locationList.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = vi.inflate(R.layout.listview_kind, null);
         }
         ListView_Kind_Data p = items.get(position);
@@ -70,8 +70,8 @@ public class ListView_Kind_Adapter extends ArrayAdapter<ListView_Kind_Data> {
                 public void onClick(View view) {
 
                     int position = (int) view.getTag();
-                    select_data.kindAdapter.removeItem(position);
-                    select_data.kindAdapter.notifyDataSetChanged();
+                    locationList.kindAdapter.removeItem(position);
+                    locationList.kindAdapter.notifyDataSetChanged();
                 }
             });
 

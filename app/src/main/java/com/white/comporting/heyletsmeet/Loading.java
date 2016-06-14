@@ -16,7 +16,7 @@ public class Loading extends AppCompatActivity {
         Handler handler = new Handler(){
             public void handleMessage(Message msg){
                 super.handleMessage(msg);
-                startActivity(new Intent(Loading.this, Select_Data.class));
+                startActivity(new Intent(Loading.this, Location_List.class));
                 //overridePendingTransition(R.anim.abc_fade_in, 0);
                 SharedPreferences preferences = getSharedPreferences("Location",MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
