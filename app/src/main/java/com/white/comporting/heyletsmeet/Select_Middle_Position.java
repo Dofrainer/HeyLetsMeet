@@ -13,6 +13,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 
@@ -100,7 +102,7 @@ public class Select_Middle_Position extends AppCompatActivity implements OnMapRe
             Subway.title(LocSubwayArray.get(i).strAdd);
             Subway.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
             // 마커를 추가하고 말풍선 표시한 것을 보여주도록 호출
-            mGoogleMap.addMarker(Subway).showInfoWindow();
+            mGoogleMap.addMarker(Subway);
             // 마커 표시하기 : 위치지정, 풍선말 설정
         }
 
@@ -114,7 +116,7 @@ public class Select_Middle_Position extends AppCompatActivity implements OnMapRe
                 UserMarker.position(new LatLng(LocDataArray.get(i).Lat, LocDataArray.get(i).Long));
                 UserMarker.title(LocDataArray.get(i).strAdd);
                 // 마커를 추가하고 말풍선 표시한 것을 보여주도록 호출
-                mGoogleMap.addMarker(UserMarker).showInfoWindow();
+                mGoogleMap.addMarker(UserMarker);
                 // 마커 표시하기 : 위치지정, 풍선말 설정
                 MiddlePos.Lat += LocDataArray.get(i).Lat;
                 MiddlePos.Long += LocDataArray.get(i).Long;
@@ -130,6 +132,22 @@ public class Select_Middle_Position extends AppCompatActivity implements OnMapRe
         MiddleMarker.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         // 마커를 추가하고 말풍선 표시한 것을 보여주도록 호출
         mGoogleMap.addMarker(MiddleMarker).showInfoWindow();
+
+        //중간위치와 사용자위치를 연결하는 선
+        for(int i = 0; i < LocDataArray.size() ; i ++)
+        {
+            if(LocDataArray.get(i).position != -1) {
+                PolylineOptions rectOptions = new PolylineOptions();
+                rectOptions.add(new LatLng(MiddlePos.Lat,MiddlePos.Long));
+                rectOptions.add(new LatLng(LocDataArray.get(i).Lat,LocDataArray.get(i).Long));
+                rectOptions.color(0xFFFF0000); //빨강
+                rectOptions.width(10);
+                mGoogleMap.addPolyline(rectOptions);
+            }
+        }
+
+
+
 
         // 마커 클릭했을 떄 처리 : 리스너 달기
         mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
