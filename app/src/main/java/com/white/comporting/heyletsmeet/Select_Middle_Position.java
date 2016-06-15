@@ -56,9 +56,8 @@ public class Select_Middle_Position extends AppCompatActivity implements OnMapRe
             String strAdd = edit.getString("strAdd"+i,"");
             int pos = edit.getInt("pos"+i,-1);
             LocDataArray.add(new Location_Data(Lat,Long,strAdd,pos));
-            NearSubwayArray.add(new Location_Data()); //가까운 지하철역 선택 5군데
 
-
+            NearSubwayArray.add(new Location_Data()); //빈 공간 생성
         }
 
         SharedPreferences.Editor editor = edit.edit();
@@ -128,6 +127,7 @@ public class Select_Middle_Position extends AppCompatActivity implements OnMapRe
             }
         }
 
+        //중간위치 마커
         MiddlePos.Lat /= MiddlePos.position;
         MiddlePos.Long /= MiddlePos.position;
         MarkerOptions MiddleMarker = new MarkerOptions();
@@ -160,26 +160,40 @@ public class Select_Middle_Position extends AppCompatActivity implements OnMapRe
             Location MidLoc = new Location(MiddlePos.strAdd);
             MidLoc.setLatitude(MiddlePos.Lat);
             MidLoc.setLongitude(MiddlePos.Long);
+
             double distance = MidLoc.distanceTo(SubLoc);
-            for(int j=0;j<5; j++)
+
+            for(int j=0;j < 5; j++)
             {
-                if(NearSubwayArray.get(j).distance > distance || NearSubwayArray.get(j).position == -1)
+                if( NearSubwayArray.get(j).distance > distance || NearSubwayArray.get(j).position == -1
+                        )
                 {
-                    NearSubwayArray.get(j).Lat = LocSubwayArray.get(i).Lat;
-                    NearSubwayArray.get(j).Long = LocSubwayArray.get(i).Long;
-                    NearSubwayArray.get(j).strAdd = LocSubwayArray.get(i).strAdd;
+                    NearSubwayArray.add(j,new Location_Data(LocSubwayArray.get(i)));
                     NearSubwayArray.get(j).distance = distance;
                     NearSubwayArray.get(j).position = 1;
-
+                    NearSubwayArray.remove(5);
                     break;
-                }
 
+                }
             }
+
+
+
+        }
+        for(int i = 0; i <5 ; i ++)
+        {
+            MarkerOptions Subway = new MarkerOptions();
+            Subway.position(new LatLng(NearSubwayArray.get(i).Lat,NearSubwayArray.get(i).Long));
+            Subway.title(NearSubwayArray.get(i).strAdd);
+            Subway.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+            // 마커를 추가하고 말풍선 표시한 것을 보여주도록 호출
+            mGoogleMap.addMarker(Subway);
         }
 
-
-
-
+        //카메라 이동
+        LatLng MiddleLatLng = new LatLng(MiddlePos.Lat,MiddlePos.Long);
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(MiddleLatLng));
+        mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(12),2000,null);
         // 마커 클릭했을 떄 처리 : 리스너 달기
         mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
 
@@ -191,6 +205,8 @@ public class Select_Middle_Position extends AppCompatActivity implements OnMapRe
                 return false;
             }
         });
+
+
 
         mGoogleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override

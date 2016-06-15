@@ -22,6 +22,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
@@ -136,9 +137,6 @@ public class Location_Select  extends AppCompatActivity implements OnMapReadyCal
         LatLng Korea = new LatLng(35.30, 126.54);
         map = googleMap;
         Geocoder geocoder;
-        googleMap.addMarker(new MarkerOptions().position(Korea).title("대한민국"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(Korea));
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(20),2000,null);
         geocoder = new Geocoder(Location_Select.this);
         try {
             listAddress = geocoder.getFromLocationName("서울",1);
@@ -149,7 +147,6 @@ public class Location_Select  extends AppCompatActivity implements OnMapReadyCal
             map.animateCamera(CameraUpdateFactory.zoomTo(12),2000,null);
             UiSettings ui = map.getUiSettings();
             ui.setZoomControlsEnabled(true);
-
 
         } catch (IOException e) {
             // TODO Auto-generated catch block

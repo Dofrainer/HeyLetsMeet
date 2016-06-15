@@ -51,12 +51,20 @@ public class Location_List extends AppCompatActivity {
                 case R.id.broadPeaple: // 완료 버튼 클릭시
                     SharedPreferences edit = getSharedPreferences("LocationArray", MODE_PRIVATE);
                     SharedPreferences.Editor editor = edit.edit();
+                    boolean CheckData = false;
                     for(int i = 0 ; i < 5 ; i ++)
                     {
+                        if(LocDataArray.get(i).position != -1)
+                            CheckData = true;
                         Location_Data.PrePutDouble(editor,"Long"+i,LocDataArray.get(i).Long);
                         Location_Data.PrePutDouble(editor,"Lat"+i,LocDataArray.get(i).Lat);
                         editor.putString("strAdd"+i, LocDataArray.get(i).strAdd);
                         editor.putInt("pos"+i, LocDataArray.get(i).position);
+                    }
+                    if(CheckData == false)
+                    {
+                        Toast.makeText(getApplicationContext(),"내용이 비어있습니다",Toast.LENGTH_LONG).show();
+                        return;
                     }
                     editor.commit();
 

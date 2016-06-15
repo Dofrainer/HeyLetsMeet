@@ -29,6 +29,8 @@
         </activity>
         <activity android:name=".Client" android:label="전송중...">
         </activity>
+        <activity android:name=".DevInfo" android:label="개발자 정보!!">
+        </activity>
 
     </application>
 

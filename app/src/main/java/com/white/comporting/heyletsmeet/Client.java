@@ -1,10 +1,15 @@
 package com.white.comporting.heyletsmeet;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -14,7 +19,7 @@ public class Client extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.load);
+        setContentView(R.layout.sending);
         ArrayList<String> arrType = new ArrayList<String>();
         SharedPreferences edit = getSharedPreferences("FinalData", MODE_PRIVATE);
         Select_Subway = edit.getString("strAdd","");
@@ -44,10 +49,42 @@ public class Client extends AppCompatActivity {
         }
         editor.clear();
         editor.commit();
-        String URL = Client_SendData.SendToServer(Select_Subway,arrType,Client.this);
-        Intent myIntent;
-        myIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.nvaer.com"));
-        startActivity(myIntent);
+        Handler mHandler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message inputMessage) {
+                switch(inputMessage.what){
+                    case Client_SendData.MessageTypeClass.SIMSOCK_DATA :
+                        String msg = (String) inputMessage.obj;
+                        Log.d("OUT",  msg);
+                        // do something with UI
+                        break;
+
+                    case  Client_SendData.MessageTypeClass.SIMSOCK_CONNECTED :
+                        // do something with UI
+                        break;
+
+                    case  Client_SendData.MessageTypeClass.SIMSOCK_DISCONNECTED :
+                        // do something with UI
+                        break;
+
+                }
+            }
+        };
+
+        Client_SendData ssocket = new Client_SendData("211.115.230.74", mHandler,Select_Subway, arrType,Client.this);
+        ssocket.start();
+
+        ImageView Logo = (ImageView) findViewById(R.id.imgLogo);
+        Logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentSubActivity =
+                        new Intent(Client.this, DevInfo.class);
+                startActivity(intentSubActivity);
+            }
+        });
+
+
     }
 }
 /**

@@ -12,6 +12,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/imgLogo"
         android:src="@drawable/load"
         android:layout_above="@+id/textView"
         android:layout_alignParentLeft="true"
