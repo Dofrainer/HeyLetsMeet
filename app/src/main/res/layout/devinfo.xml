@@ -8,13 +8,19 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context= ".DevInfo">
+    tools:context= ".DevInfo"
+    android:weightSum="1">
 
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/image" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="개발자: 백길준, 곽철규, 함효식, 모든걸 다 해낸 갓현종!!!!"
+        android:text="개발자: 갓길이 백길준, 갓철규, 함평식, 팀의 기둥 갓현종!!!!"
         android:id="@+id/textView"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -31,17 +37,36 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="길준: 3일째 집을 못갔어요...죽을거 같아요.... 진심"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="43dp"
         android:textColor="#3422d9" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="한글"
+        android:text="철규:A/S는 없습니다....."
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="43dp"
         android:textColor="#3422d9" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="현종:상남자 상주신 아이라이크더붐바스틱 "
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#3422d9" />
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="효식: 함평식씨 "
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:textColor="#3422d9" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="버젼: V 1.0 "
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
